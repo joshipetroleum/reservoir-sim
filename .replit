@@ -1,15 +1,29 @@
-entrypoint = "main.py"
+# .replit  —  3‑Phase MFHW Simulator
+
 modules = ["python-3.11"]
+
+[web]
+# Command to launch your Streamlit app
+command = "streamlit run app.py --server.address 0.0.0.0 --server.port 8501 --server.headless true --browser.gatherUsageStats false"
+# The port Streamlit listens on
+port = 8501
 
 [nix]
 channel = "stable-24_05"
+packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "pkg-config", "qhull", "tcl", "tk"]
 
 [unitTest]
 language = "python3"
 
 [gitHubImport]
-requiredFiles = [".replit", "replit.nix"]
+requiredFiles = [".replit","replit.nix"]
 
 [deployment]
-run = ["python3", "main.py"]
+run = [
+  "streamlit","run","app.py",
+  "--server.address","0.0.0.0",
+  "--server.port","8501",
+  "--server.headless","true",
+  "--browser.gatherUsageStats","false"
+]
 deploymentTarget = "cloudrun"
