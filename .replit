@@ -1,8 +1,29 @@
-entrypoint = "main.py"
+# .replit
 modules = ["python-3.11"]
+
+run = "bash -c 'streamlit run app.py \
+  --server.headless true \
+  --server.address 0.0.0.0 \
+  --server.port $PORT \
+  --browser.gatherUsageStats false'"# ▶ Run button command
+
+alwaysOpenInBrowser = true
 
 [nix]
 channel = "stable-24_05"
+packages = [
+  "cairo",
+  "ffmpeg-full",
+  "freetype",
+  "ghostscript",
+  "glibcLocales",
+  "gobject-introspection",
+  "gtk3",
+  "pkg-config",
+  "qhull",
+  "tcl",
+  "tk",
+]
 
 [unitTest]
 language = "python3"
@@ -11,5 +32,12 @@ language = "python3"
 requiredFiles = [".replit", "replit.nix"]
 
 [deployment]
-run = ["python3", "main.py"]
+run = [
+  "bash","-c",
+  "streamlit run app.py \
+    --server.headless true \
+    --server.address 0.0.0.0 \
+    --server.port $PORT \
+    --browser.gatherUsageStats false"
+]
 deploymentTarget = "cloudrun"
